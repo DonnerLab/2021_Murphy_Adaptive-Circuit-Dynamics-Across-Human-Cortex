@@ -36,6 +36,6 @@ Scripts for preprocessing and analysing pupillometric and eye-tracking data.
 -	`loop_interp.m`: interpolates pupil and gaze position time-series.
 -	`analyse_pupil.m`: example script for analysing pupil data. In this case, script pulls and plots trial-averaged pupil responses, regresses pupil diameter onto computational variables of interest in a time-resolved fashion, and runs ‘psychophysiological interaction’ style choice regressions to quantify the impact that residual pupil fluctuations have on the weighting of evidence samples in choice.
 #### task_decision and task_motor:
-Scripts that use [Psychotoolbox-3](http://psychtoolbox.org/) to run the decision-making and motor-localizer tasks.
+Scripts that use [Psychtoolbox-3](http://psychtoolbox.org/) to run the decision-making and motor-localizer tasks.
 -	Decision-making task: run training routine with `Surprise_radial_checkers_intro.m` and main task with `Surprise_radial_checkers_block.m`.
 -	Motor localizer task: run with `Motor_localizer_block.m`.
