@@ -1,7 +1,7 @@
 ## 2021_Murphy_Adaptive-Circuit-Dynamics-Across-Human-Cortex
 Analysis and task code for
 
-**Murphy PR, Wilming N, Hernandez Bocanegra DC, Prat Ortega G & Donner TH (2021).** [**Adaptive circuit dynamics across human cortex during evidence accumulation in changing environments.](https://www.biorxiv.org/content/10.1101/2020.01.29.924795v4) ***bioRxiv*.**
+**Murphy PR, Wilming N, Hernandez Bocanegra DC, Prat Ortega G & Donner TH (2021).** [**Adaptive circuit dynamics across human cortex during evidence accumulation in changing environments.**](https://www.biorxiv.org/content/10.1101/2020.01.29.924795v4) ***bioRxiv*.**
 
 Raw behavioural and eye-tracking data are available [here](https://figshare.com/articles/dataset/Behavioral_and_Eye-tracking_Data_for_Adaptive_Circuit_Dynamics_Across_Human_Cortex_During_Evidence_Accumulation_in_Changing_Environments/14035935). Raw MEG data are available [here](). Source reconstructed MEG data are available [here](). Source data for all main text figures and code to reproduce them are available [here](). All are shared under a CC-BY 4.0 license.
 
