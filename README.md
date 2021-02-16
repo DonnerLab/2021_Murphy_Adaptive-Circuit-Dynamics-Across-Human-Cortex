@@ -1,8 +1,11 @@
 ## 2021-Adaptive-Circuit-Dynamics-Across-Human-Cortex
 Task and analysis code for
+
 **Murphy PR, Wilming N, Hernandez Bocanegra DC, Prat Ortega G & Donner TH (2021). Adaptive circuit dynamics across human cortex during evidence accumulation in changing environments. bioRxiv.**
+
 Raw behavioural and eye-tracking data are available at [WWW](). Raw MEG data are available at [XXX](). Source reconstructed MEG data are available at [YYY](). Source data for all main text figures and code to reproduce them are available at [ZZZ](). All are shared under a CC-BY 4.0 license.
 Code shared here was developed and tested using Matlab R2015a, [FieldTrip Toolbox](https://www.fieldtriptoolbox.org/) version 20160221, Python 3.6 and [mne](https://mne.tools/stable/index.html) version 0.16.2.
+
 Further detail on analysis is provided below. For questions, contact murphyp7@tcd.ie.
 
 #### behav_modelling:
