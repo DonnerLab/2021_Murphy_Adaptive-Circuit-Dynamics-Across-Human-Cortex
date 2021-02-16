@@ -1,4 +1,4 @@
-## 2021-Adaptive-Circuit-Dynamics-Across-Human-Cortex
+## 2021_Murphy_Adaptive-Circuit-Dynamics-Across-Human-Cortex
 Analysis and task code for
 
 [**Murphy PR, Wilming N, Hernandez Bocanegra DC, Prat Ortega G & Donner TH (2021). Adaptive circuit dynamics across human cortex during evidence accumulation in changing environments. bioRxiv.**](https://www.biorxiv.org/content/10.1101/2020.01.29.924795v4)
