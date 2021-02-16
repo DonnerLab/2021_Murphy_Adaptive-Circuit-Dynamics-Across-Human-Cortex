@@ -3,18 +3,18 @@ Analysis and task code for
 
 [**Murphy PR, Wilming N, Hernandez Bocanegra DC, Prat Ortega G & Donner TH (2021). Adaptive circuit dynamics across human cortex during evidence accumulation in changing environments. bioRxiv.**](https://www.biorxiv.org/content/10.1101/2020.01.29.924795v4)
 
-Raw behavioural and eye-tracking data are available at [WWW](). Raw MEG data are available at [XXX](). Source reconstructed MEG data are available at [YYY](). Source data for all main text figures and code to reproduce them are available at [ZZZ](). All are shared under a CC-BY 4.0 license.
+Raw behavioural and eye-tracking data are available [here](https://figshare.com/articles/dataset/Behavioral_and_Eye-tracking_Data_for_Adaptive_Circuit_Dynamics_Across_Human_Cortex_During_Evidence_Accumulation_in_Changing_Environments/14035935). Raw MEG data are available [here](). Source reconstructed MEG data are available [here](). Source data for all main text figures and code to reproduce them are available [here](). All are shared under a CC-BY 4.0 license.
 
 Code shared here was developed and tested using Matlab R2015a, [FieldTrip Toolbox](https://www.fieldtriptoolbox.org/) version 20160221, Python 3.6 and [mne](https://mne.tools/stable/index.html) version 0.16.2.
 
 Further detail on analysis and task scripts is provided below. For questions, contact murphyp7@tcd.ie.
 
-#### behav_modelling:
-Scripts for fitting a variety of illustrative model variants to choice data, some basic (e.g. `Glaze_basic` for normative model with three free parameters) and some more complex (e.g. `FitPsi_data_npLLR_InconUp` for a model in which both stimulus->log-likelihood ratio and posterior belief->next-sample prior are estimated as interpolated functions, and which includes a term reflecting over-/under-weighting of new evidence that is inconsistent with the existing belief). Code for each model variant is contained in individual subdirectories.
--	Models are fit via particle swarm optimization ([Birge, 2003, *IEEE Swarm Intelligence Symposium*](https://ieeexplore.ieee.org/document/1202265); [code here](https://www.mathworks.com/matlabcentral/fileexchange/7506-particle-swarm-optimization-toolbox)), with very slightly adapted version of code included in the `particle_swarm_Glaze` subdirectory (changes made code work with global variables passed to it via higher-level scripts, and are commented with `% PM`).
+### behav_modelling:
+Scripts for fitting a variety of illustrative model variants to choice data, some basic (e.g. `Glaze_basic` for normative model with three free parameters) and some more complex (e.g. `FitPsi_data_npLLR_InconUp` for a model in which both stimulus->log-likelihood ratio and posterior belief->next-sample prior are estimated as interpolated functions, and which includes a term reflecting over-/under-weighting of new evidence that is inconsistent with the existing belief). Code for each distinct model variant is contained in individual subdirectories.
+-	Models are fit via particle swarm optimization ([Birge, 2003, *IEEE Swarm Intelligence Symposium*](https://ieeexplore.ieee.org/document/1202265); [code here](https://www.mathworks.com/matlabcentral/fileexchange/7506-particle-swarm-optimization-toolbox)), with very slightly adapted version of code included here in the `particle_swarm_Glaze` subdirectory (changes are commented with `%%% PM` made code work with global variables passed from higher-level scripts).
 -	`pull_behav_fits.m`: example script that loads participant behavioural data and associated model fits and computes variety of measures (accuracy, psychophysical kernels, etc.)
 #### circuit_modelling:
--	`run_trials.m`: top-level script that specifies circuit and task parameters of interest, loads stimulus inputs provided to participants (and provided here in `norm_vars.mat`), and simulates 50 trials of the circuit model provided with these inputs.
+-	`run_trials.m`: top-level script that specifies circuit and task parameters of interest, loads stimulus inputs provided to participants (and included here in `norm_vars.mat`), and simulates 50 trials of the circuit model using a selection of these inputs.
 #### motor_localizer:
 Scripts for preprocessing sensor-level MEG data from both decision-making and motor localizer tasks, estimating spatio-spectral motor preparatory filter weights from the localizer task, and applying these filters in analyses of data from the decision-making task.
 -	`MEGpreprocessing.m` and `MEGpreprocessingMotor.m`: preprocess raw MEG data and reject trials with artifacts.
