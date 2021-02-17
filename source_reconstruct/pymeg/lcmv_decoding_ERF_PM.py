@@ -26,12 +26,11 @@ import pandas as pd
 from pymeg.lcmv_peter import get_stim_epoch
 from pymeg.source_reconstruction import (
     get_leadfield,
-    make_trans,   # NB: source_reconstruction also has get_trans_epoch, get_ctf_trans - not sure which we want, NW has get_trans
+    make_trans,
 )
 
 # Setup some paths:
 memory = Memory(cachedir='/mnt/homes/home024/pmurphy/tmp/')
-# path = "/home/nwilming/conf_meg/sr_labeled/"    ###### PM: WHAT IS THIS PATH FOR?????
 subjects_dir = "/home/pmurphy/meg_data/surprise/MRIs/fs_converted" # freesurfer subject dirs
 trans_dir = "/home/pmurphy/meg_data/surprise/MRIs/trans_mats" # transofrmation matrices
 
@@ -140,12 +139,12 @@ def submit(only_glasser=False):
             print("Submitting %s -> %s" % (subject, area))
             parallel.pmap(
                 decode,
-                [(subject, area, subjects[subject])],  ##### PM: added session/recording info as input
+                [(subject, area, subjects[subject])],
                 walltime="80:00:00",
                 memory=mem_demand[subject]*10 -10,
                 nodes=1,
                 tasks=mem_demand[subject] -1,
-                env="mne",   ##### PM: switched from py36 to mne
+                env="mne",
                 name="dcd_" + area + subject,
             )
 
@@ -220,15 +219,15 @@ def decode(
     low_pass_fs = None   # low-pass filter cutoff; set to None is no filter required
     for sess, rec in sessinfo:
         logging.info("Reading data for %s, sess %i, rec %i "% (subject,sess,rec))
-        data_cov,epoch,epoch_filename = get_stim_epoch(subject, sess, rec, lopass=low_pass_fs)  #### PM: my get_stim_epoch fun may be different to NW's, has 3 outputs...
-        data.append((data_cov, epoch)); ##### PM: N.B. data may in fact need to be output currently called 'epochs'
+        data_cov,epoch,epoch_filename = get_stim_epoch(subject, sess, rec, lopass=low_pass_fs)
+        data.append((data_cov, epoch));
 
         logging.info("Setting up source space and forward model")
         raw_filename = glob('/home/pmurphy/meg_data/surprise/%s-%i*_0%i.ds' %
                             (subject, sess, rec))[0]
         trans_filename = glob('/home/pmurphy/meg_data/surprise/MRIs/trans_mats/%s_%i_0%i*fif' % (
             subject, sess, rec))[0]
-        forward, bem, source = get_leadfield(                                 ########### PM: this is my get_leadfield function - may still need work to be integrated here
+        forward, bem, source = get_leadfield(
             subject, raw_filename, epoch_filename, trans_filename, bem_sub_path='bem_ft')
         fwds.append(forward); # bems.append(bem); sources.append(source);
 
@@ -238,7 +237,7 @@ def decode(
 
     # Compute LCMV filters for each session
     filters = []
-    for (data_cov, epochs), forward in zip(data, fwds):   # PM: N.B. data_cov may not be part of data as currently configured
+    for (data_cov, epochs), forward in zip(data, fwds):
         filters.append(
             pymeglcmv.setup_filters(epochs.info, forward, data_cov, None, [label])
         )
@@ -264,7 +263,7 @@ def decode(
     mat = sio.loadmat(matname)
 
     mat_events = np.int64(np.concatenate(mat["tIDs"]))  # convert matlab events to same type as python events
-    assert np.array_equal(events,mat_events[:len(events)])    ##### PM: remove [:len(events)] after testing single session
+    assert np.array_equal(events,mat_events[:len(events)])
 
     # Perform source reconstruction, using for each session the appropriate filter
     # Iterates over sample positions to mitigate memory demands
@@ -297,7 +296,7 @@ def decode(
             for target in ["LLR", "vPE"]:
                 # pull variable to be decoded
                 target_vals = mat[target]   #  target_vals will be a numpy ndarray, ntrials*nsamples
-                target_vals = target_vals[:len(events),:]    ##### PM: remove this line after testing single session
+                target_vals = target_vals[:len(events),:]
 
                 # perform decoding
                 dcd = decoding_ERF.Decoder(target_vals[:,smp],("RidgeReg",clf))
@@ -320,14 +319,4 @@ def decode(
 
     return k
 
-# # code for reading already created individual sample files to csv
-# subject = "ECB"
-# area = area = "vfcPrimary"
-# for alphaRR in [1]:
-#     all_smp = []
-#     for smp in [0]:
-#         fname = "/home/pmurphy/Surprise_accumulation/Analysis/MEG/Conv2mne/decode/%s_%s_%s_%s_finegrainTF_nophase.hdf" % (subject, area, str(smp+1), str(alphaRR))
-#         all_s = pd.read_hdf(fname)
-#         all_smp.append(all_s)
-#     all_smp = pd.concat(all_smp)  # concatenate all sample positions
-#     all_smp.to_csv("/home/pmurphy/Surprise_accumulation/Analysis/MEG/Conv2mne/decode/%s_%s_%s_full_finegrainTF_nophase.csv" % (subject, area, str(alphaRR)))
+
